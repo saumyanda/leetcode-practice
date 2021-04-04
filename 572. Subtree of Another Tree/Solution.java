@@ -14,27 +14,35 @@
  * }
  */
 class Solution {
-    public boolean isIdentical(TreeNode s, TreeNode t) {
-        if(s==null && t==null)
-            return true;
-        
-        if(s==null && t!=null)
-            return false;
-        
-        if(t==null && s!=null)
-            return false;
-        
-        return s.val==t.val && 
-            isIdentical(s.left,t.left) &&
-            isIdentical(s.right,t.right);
-    }
     public boolean isSubtree(TreeNode s, TreeNode t) {
-        if(t==null)
-            return true;
         if(s==null)
+        {
             return false;
-        if(isIdentical(s,t))
+        }
+        else if((isSameTree(s,t)))
+        {
             return true;
-        return isSubtree(s.left,t) || isSubtree(s.right,t);
+        }
+        else
+        {
+            return isSubtree(s.left,t) || isSubtree(s.right,t);
+        }
+    }
+    
+    public boolean isSameTree(TreeNode s, TreeNode t)
+    {
+        if(s==null || t==null)
+        {
+            return s==t;
+        }
+        
+        if(s.val==t.val)
+        {
+    return isSameTree(s.left,t.left) && isSameTree(s.right,t.right);
+        }
+        else
+        {
+            return false;
+        }
     }
 }
