@@ -14,27 +14,50 @@
  * }
  */
 class Solution {
+    //For each node, check if max value in left subtree is smaller 
+    //than the node and min value in right subtree greater than the node
     public boolean isValidBST(TreeNode root) {
-      return helper(root,null,null);
+       
+        if(root==null)
+            return true;
+        
+        if(root.left!=null && maxValue(root.left)>=root.val)
+            return false;
+        
+        if(root.right!=null && minValue(root.right)<=root.val)
+            return false;
+        
+        if(!isValidBST(root.left) || !isValidBST(root.right))
+            return false;
+        
+        return true;
     }
     
-    public boolean helper(TreeNode root, TreeNode l, TreeNode r)
+    private int maxValue(TreeNode root)
     {
         if(root==null)
-        {
-            return true;
-        }
+            return 0;
         
-        if(l!=null && root.val<=l.val)
+        TreeNode temp=root;
+        if(temp.right!=null)
+        while(temp.right!=null)
         {
-            return false;
+            temp=temp.right;
         }
+        return temp.val;
+    }
+    
+     private int minValue(TreeNode root)
+    {
+        if(root==null)
+            return 0;
         
-        if(r!=null && root.val>=r.val)
+        TreeNode temp=root;
+        if(temp.left!=null)
+        while(temp.left!=null)
         {
-            return false;
+            temp=temp.left;
         }
-        
-        return helper(root.left,l,root) && helper(root.right,root,r);
+        return temp.val;
     }
 }
