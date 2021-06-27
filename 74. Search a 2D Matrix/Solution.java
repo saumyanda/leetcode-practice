@@ -1,21 +1,35 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
+           
+           int rows=matrix.length;
         
-        if(matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
-        int i = matrix.length -1;
-        int j = matrix[0].length -1;
-        if(target > matrix[i][j] || target < matrix[0][0] ) return false;
-
-        int x = 0;
-        int y = j;
-        while(x <= i&& y>=0){
-            if(target == matrix[x][y]) return true;
-            else if( target < matrix[x][y]){
-                y--;
-            }else{
-                x++;
-            }
-        }
+           int cols=matrix[0].length;
+        
+           //Visualize the 2d matrix as a sorted 1d array of size rows*cols
+           int left=0, right=rows*cols-1;
+           
+           while(left<=right)
+           {
+               int middleIndex=(left+right)/2;
+               
+               int middleElement=matrix[middleIndex/cols][middleIndex%cols];
+               
+               if(target==middleElement)
+               {
+                   return true;
+               }
+               
+               else if(target<middleElement)
+               {
+                   right=middleIndex-1;
+               }
+               else
+               {
+                   left=middleIndex+1;
+               }
+           }
+        
         return false;
+           
     }
 }
