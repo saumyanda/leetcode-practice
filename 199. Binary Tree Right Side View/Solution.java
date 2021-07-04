@@ -16,37 +16,45 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         
-        List<Integer> result=new LinkedList<>();
+        List<Integer> res = new ArrayList<>();
         
         if(root==null)
         {
-           return result; 
+            return res;
         }
-        
-        Queue<TreeNode> queue=new LinkedList<>();
-        queue.add(root);
-        while(!queue.isEmpty())
+      
+        Queue<TreeNode> q=new LinkedList<>();
+        q.offer(root);
+        //We can do a level order traversal and add the last node to return the result. 
+        //The time complexity is O(N) since each node is visited at most once
+        while(q.size()>0)
         {
-            int size=queue.size();
-            for(int i=0;i<size;i++)
+            int n=q.size();
+
+            TreeNode right=null;
+
+            for(int i=0;i<n;i++)
             {
-                TreeNode current=queue.remove();
-                
-                if(i==size-1)
+                TreeNode current=q.poll();
+
+                if(i==n-1)
                 {
-                    result.add(current.val); 
+                    right=current;
                 }
-                
+
                 if(current.left!=null)
                 {
-                    queue.add(current.left);
+                    q.offer(current.left);
                 }
+
                 if(current.right!=null)
                 {
-                    queue.add(current.right);
+                    q.offer(current.right);
                 }
             }
+            res.add(right.val);
         }
-        return result;
+
+        return res;
     }
 }
