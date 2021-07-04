@@ -1,39 +1,45 @@
 class Solution {
+    
+    private Map<Character, char[]> KEYBOARD=new HashMap<>();
+    
     public List<String> letterCombinations(String digits) {
-       List<String> result=new ArrayList<String>();
-       if(digits==null || digits.length()==0)
-       {
-           return result;
-       }
-       String[] mappings={"0",
-                          "1",
-                          "abc",
-                          "def",
-                          "ghi",
-                          "jkl",
-                         "mno",
-                         "pqrs",
-                         "tuv",
-                         "wxyz"};
         
-        helper(result,mappings,digits,0,"");
-            
-        return result;   
+        KEYBOARD.put('2', "abc".toCharArray());
+        KEYBOARD.put('3', "def".toCharArray());
+        KEYBOARD.put('4', "ghi".toCharArray());
+        KEYBOARD.put('5', "jkl".toCharArray());
+        KEYBOARD.put('6', "mno".toCharArray());
+        KEYBOARD.put('7', "pqrs".toCharArray());
+        KEYBOARD.put('8', "tuv".toCharArray());
+        KEYBOARD.put('9', "wxyz".toCharArray());
+        
+        List<String> res=new LinkedList<>();
+        
+        if(digits.length()==0)
+            return res;
+        
+        StringBuilder path=new StringBuilder();
+        
+        dfs(path,res,digits.toCharArray());
+        
+        return res;
     }
     
-    public void helper(List<String> result,String[] mappings, String digits, int idx, String current)
+    private void dfs(StringBuilder path, List<String> res, char[] digits)
     {
-        if(idx==digits.length())
+        if(path.length()==digits.length)
         {
-            result.add(current);
+            res.add(path.toString());
             return;
         }
         
-        String letters=mappings[digits.charAt(idx)-'0'];
+        char[] letters=KEYBOARD.get(digits[path.length()]);
         
-        for(int i=0;i<letters.length();i++)
+        for(int i=0;i<letters.length;i++)
         {
-      helper(result,mappings,digits,idx+1,current+letters.charAt(i));
+            path.append(letters[i]);
+            dfs(path,res,digits);
+            path.deleteCharAt(path.length()-1);
         }
     }
 }
