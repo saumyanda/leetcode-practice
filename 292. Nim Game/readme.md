@@ -1,3 +1,5 @@
+https://leetcode.com/problems/nim-game/
+
 You are playing the following Nim Game with your friend:
 
 Initially, there is a heap of stones on the table.
