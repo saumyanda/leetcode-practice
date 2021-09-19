@@ -15,24 +15,23 @@
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
-      
+        
+       //base case - without recursion
         if(root==null)
+        {
             return root;
+        }
         
-        if(root.left==null && root.right==null)
-            return root;
+        //swap left and right children
+        TreeNode temp=root.right;
+        root.right=root.left;
+        root.left=temp;
         
-        TreeNode temp=root.left;
-        root.left=root.right;
-        root.right=temp;
+        //invert child Trees recursively
+        TreeNode left=invertTree(root.left);
+        TreeNode right=invertTree(root.right);
         
-        if(root.left!=null)
-            root.left = invertTree(root.left);
-        
-        if(root.right!=null)
-            root.right = invertTree(root.right);
-        
-        return root;
-        
+         return root;
     }
+    
 }
