@@ -1,5 +1,7 @@
 class Solution {
     public int totalFruit(int[] fruits) {
+        //basically the same as find longest subarray with atmost 2 different numbers
+        //https://leetcode.com/problems/fruit-into-baskets/discuss/170740/JavaC%2B%2BPython-Sliding-Window-for-K-Elements
         
         int maxTotalFruits=0;
         
