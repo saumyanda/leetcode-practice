@@ -1,5 +1,6 @@
 class Solution {
     public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
+        //https://leetcode.com/problems/find-and-replace-in-string/discuss/455922/Java-or-Beats-100-or-Simple-one-pass-solution-left-to-right
         //Step 1 : create an index map of indices
         //sort the indices array from left to right
         HashMap<Integer,Integer> indexMap=new HashMap<>();
