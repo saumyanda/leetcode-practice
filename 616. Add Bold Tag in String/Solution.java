@@ -12,6 +12,11 @@ dict = ["aaa","aab","bc"]
    then combine these intervals
    
    Ater merged, we got [0,6], so we know "aaabbc" needs to be surrounded by tag.
+   
+   Time Complexity:
+   Parsing S based on dict -> O( len(S) * size of word(dict) * dict.length) and is likely the most expensive operation.
+Merge -> Sorting intervals, when there are N intervals , (N = len(S)) -> O(n* log n)
+Reading S back -> O(N)
     */
     public String addBoldTag(String s, String[] words) {
         
