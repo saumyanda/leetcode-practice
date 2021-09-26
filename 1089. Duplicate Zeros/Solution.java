@@ -1,5 +1,6 @@
 class Solution {
     /*
+//https://youtu.be/io3N5YTFbxM
 i is the position in the original array,
 j is the position in the new array.
 (the original and the new are actually the same array.)
@@ -22,6 +23,7 @@ so that the original value won't be overridden too early.
             }
         }
         
+        //length of larger array after duplicating zeroes
         int len=arr.length+countZeroes;
         
         //i points to the position in the array and j points to new position
