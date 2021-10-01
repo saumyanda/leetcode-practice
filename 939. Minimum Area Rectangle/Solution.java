@@ -1,4 +1,7 @@
 class Solution {
+    
+    //https://leetcode.com/problems/minimum-area-rectangle/discuss/900264/IntuitiveWith-PicturesC%2B%2BJavaExplanation
+    
     public int minAreaRect(int[][] points) {
         HashMap<Integer, Set<Integer>> hashmap = new HashMap<>();  // Key => Integer | Value => Set
         
