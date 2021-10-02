@@ -28,6 +28,9 @@ class Solution {
             behind++;
         }
         
+        //at any position get the number of moves required from last step
+        //subtract the number of balls ahead bcoz we need lesser moves
+        //add the number of balls behind that position
         for(int i=1;i<n;i++)
         {
             result[i]+=result[i-1]-ahead+behind;
