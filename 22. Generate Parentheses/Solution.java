@@ -2,51 +2,47 @@ class Solution {
     //https://youtu.be/eyCj_u3PoJE
     public List<String> generateParenthesis(int n) {
         
-        //variable to keep count of opening and closing parentheses in string
-        int open=0;
-        int close=0;
-        
-        //maximum number of open and closed parentheses
-        //we can have n open and n closed parentheses so 2*n
-        int max=n;
+        //variable to keep count of opening and closing parentheses remaining
+        int open=n;
+        int close=n;
         
         List<String> result=new LinkedList<String>();
         
         //starting from an empty string initially
         StringBuilder option=new StringBuilder();
         
-        solve(open,close,option,result,max);
+        solve(open,close,option,result);
         
         return result;
     }
     
-  private void solve(int open, int close, StringBuilder op, List<String> result, int max)
+    private void solve(int open, int close, StringBuilder option, List<String> result)
     {
         //once all open and closed parentheses have been used up
-        if(open==max && close==max)
+        if(open==0 && close==0)
         {
-            result.add(op.toString());
+            result.add(option.toString());
             return;
         }
         
         //We always have the option to choose an open parentheses
-        //until the number of open parentheses selected gets to max
-        if(open < max)
+        //until the number of open parentheses gets to 0
+        if(open > 0)
         {
-           op.append("(");
-           solve(open+1,close,op,result,max); //choose open parentheses
-           op.deleteCharAt(op.length()-1);
+           option.append("(");
+           solve(open-1,close,option,result); //choose open parentheses
+           option.deleteCharAt(option.length()-1);
         }
         
         //We only have the option to choose a closed parentheses
         //if there are extra open parentheses left in the string
         //meaning it requires closed parentheses to close the extra open parentheses
-        //open > close -> extra open parentheses used so count of remaining open is less
-        if(close < open)
+        //open < close -> extra open parentheses used so count of remaining open is less
+        if(open < close)
         {
-            op.append(")");
-            solve(open,close+1,op,result,max);
-            op.deleteCharAt(op.length()-1);
+            option.append(")");
+            solve(open,close-1,option,result);
+            option.deleteCharAt(option.length()-1);
         }
     }
 }
