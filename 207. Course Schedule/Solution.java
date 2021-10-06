@@ -1,4 +1,13 @@
 class Solution {
+    /*
+    In cycle detection, we need a third state visiting. 
+    We perform DFS on each node by: 
+    -marking a node as visiting
+    -visiting each of its neighbors
+    
+    When we reach the end of the path, i.e. no more out edges from the last node in the path, we mark the node in the path as visited. 
+    If during the DFS we happen to come back to a node that is in the visiting state, we have a cycle.
+    */
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer,List<Integer>> graph=buildGraph(prerequisites);
 
