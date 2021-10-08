@@ -3,11 +3,11 @@ class Solution {
     /*
 we can keep a track of the 1' along all the lines possible while traversing the matrix once only. 
 
-In order to do so, we make use of a 4mn sized dpdp array. 
+In order to do so, we make use of a 4mn sized dp array. 
 
-Here, dp[0]dp[0], dp[1]dp[1], dp[2]dp[2] ,dp[3]dp[3] are used to store the maximum number of continuous 1's found so far along the Horizontal, Vertical, Diagonal and Anti-diagonal lines respectively. e.g. dp[i][j][0] is used to store the number of continuous 1's found so far(till we reach the element M[i][j]M[i][j]), along the horizontal lines only.
+Here, dp[0], dp[1], dp[2],dp[3] are used to store the maximum number of continuous 1's found so far along the Horizontal, Vertical, Diagonal and Anti-diagonal lines respectively. e.g. dp[i][j][0] is used to store the number of continuous 1's found so far(till we reach the element M[i][j]), along the horizontal lines only.
 
-Thus, we traverse the matrix MM in a row-wise fashion only but, keep updating the entries for every dp appropriately.
+Thus, we traverse the matrix M in a row-wise fashion only but, keep updating the entries for every dp appropriately.
     */
     
     public int longestLine(int[][] mat) {
