@@ -1,39 +1,49 @@
-class MyCalendar {
-    
-    //TreeMap to maintain the events in sorted order and supports fast insertion
-    //keys are the start of each interval, and the values are the ends of those intervals
+//https://youtu.be/mnpZgPe4d7w
+class MyCalendarTwo {
+    //TreeMap to store: start/end time as key and frequency as values
+    //start time -> frequency + 1 (add the new active event)
+    //end time -> frequency - 1(remove the event after it ends)
     TreeMap<Integer,Integer> calendar;
 
-    public MyCalendar() {
+    public MyCalendarTwo() {
         calendar=new TreeMap<>();
     }
     
     public boolean book(int start, int end) {
         
-        //get previous interval using the floorKey method of TreeMap
-        Integer prev=calendar.floorKey(start);
+        //every time a new start time of event is reached -> new event increment count
+        calendar.put(start,calendar.getOrDefault(start,0)+1);
         
-        //get next interval using ceilingKey method of TreeMap
-        Integer next=calendar.ceilingKey(start);
+        //for every event end time, decrement count to remove the event
+        calendar.put(end,calendar.getOrDefault(end,0)-1);
         
-        /*
-        check if there is a conflict on each side with neighboring intervals: 
-        we would like calendar.get(prev)) <= start <= end <= next 
-        for the booking to be valid (or for prev or next to be null respectively.)
-        */
-         if((prev==null || calendar.get(prev)<=start) &&
-            (next==null || next>=end))
-         {
-             calendar.put(start,end);
-             return true;
-         }
+        //countActive is the count of active events till now
+        int countActive=0;
+        for(int val:calendar.values())
+        {
+            countActive+=val;
+            
+            //if the number of active events is 3 or more -> triply booked
+            //don't add the current event to calendar
+            if(countActive>=3)
+            {
+                calendar.put(start,calendar.get(start)-1);
+                calendar.put(end,calendar.get(end)+1);
+                if(calendar.get(start)==0)
+                {
+                    calendar.remove(start);
+                }
+                
+                return false;
+            }
+        }
         
-        return false;
+        return true;
     }
 }
 
 /**
- * Your MyCalendar object will be instantiated and called as such:
- * MyCalendar obj = new MyCalendar();
+ * Your MyCalendarTwo object will be instantiated and called as such:
+ * MyCalendarTwo obj = new MyCalendarTwo();
  * boolean param_1 = obj.book(start,end);
  */
