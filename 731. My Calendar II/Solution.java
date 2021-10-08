@@ -1,6 +1,6 @@
 //https://youtu.be/mnpZgPe4d7w
 class MyCalendarTwo {
-    //TreeMap to store: start/end time as key and frequency as values
+    //TreeMap to store: start/end time as key and count of active events as values
     //start time -> frequency + 1 (add the new active event)
     //end time -> frequency - 1(remove the event after it ends)
     TreeMap<Integer,Integer> calendar;
